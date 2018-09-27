@@ -64,6 +64,12 @@ class Solution:
                 cur_elem = ReElement(p[i:i+2])
             else:
                 cur_elem = ReElement(p[i])
+            if before_elem is not None and \
+                    cur_elem.is_match_many and \
+                    cur_elem.match_char == before_elem.match_char and \
+                    before_elem.is_match_many:
+                cur_elem = before_elem
+                continue
             if first_re is None:
                 first_re = cur_elem
             if before_elem is not None:
@@ -99,4 +105,4 @@ class Solution:
                 cur_re = cur_re.next
 
 
-print(Solution().isMatch("aaaaaaaaaaaaab", "a*a*a*a*a*a*a*a*a*a*c"))
+print(Solution().isMatch("aaaaaaaaaaaaab", "a*a*a*a*a*a*a*a*a*a*a*a*b"))
